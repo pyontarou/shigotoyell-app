@@ -1,0 +1,129 @@
+<div class="items-sell-contents">
+  <header class="items-sell-header">
+    <%= link_to image_tag('logo.png' , size: '185x120'), company_path(@current_company) %>
+
+  </header>
+  <div class="items-sell-main">
+    <h2 class="items-sell-title">求人情報を入力</h2>
+    <%= form_with model:@job,local: true do |f| %>
+
+    <%= render 'shared/error_messages', model: f.object %>
+
+    
+    <%# 商品名と商品説明 %>
+    <div class="new-items">
+      <div class="weight-bold-text">
+        募集職種 
+        <span class="indispensable">必須</span>
+      </div>
+      <div class="form">
+        <%= f.collection_select(:recruitment_type_id, RecruitmentType.all, :id, :name, {}, {class:"select-box", id:"item-shipping-fee-status"}) %>
+      </div>
+      <div class="weight-bold-text">
+          雇用形態
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:employment_status_id, EmploymentStatus.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
+      <div class="items-explain">
+        <div class="weight-bold-text">
+          仕事内容
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_area :job_description, class:"items-text", id:"item-info", placeholder:"仕事内容の説明（必須 1,000文字まで）（「誰に」・「何を」・「行なう仕事」なのかを端的に記入してください）例）企業向けに、会社紹介パンフレットを企画提案していく営業です。事前のアポイント設定から商談、フォローまでご担当いただきます。" ,rows:"7" ,maxlength:"1000" %>
+      </div>
+      <div class="items-explain">
+        <div class="weight-bold-text">
+          必要な経験・スキル・免許・資格など
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_area :qualification, class:"items-text", id:"item-info", placeholder:"必要な経験・スキル・免許・資格などの説明   例）◯◯実務経験△年、◯◯免許必須 、◯◯資格お持ちの方優遇" ,rows:"7" ,maxlength:"1000" %>
+      </div>
+    <%# /商品名と商品説明 %>
+
+    <%# 商品の詳細 %>
+      <div class="items-explain">
+        <div class="weight-bold-text">
+          勤務地
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_area :workplace, class:"items-text-short", id:"item-info", placeholder:"勤務地   例）◯◯県△△市□□2丁目1番地。" ,rows:"7" ,maxlength:"1000" %>
+      </div>
+      <div class="items-explain">
+        <div class="weight-bold-text">
+          給与
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_area :salary, class:"items-text-short", id:"item-info", placeholder:"給与  例）月給◯◯万円〜、時給△△△円〜、資格手当・家族手当、など" ,rows:"7" ,maxlength:"1000" %>
+      </div>
+      <div class="items-explain">
+        <div class="weight-bold-text">
+          報酬
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.text_area :bonus, class:"items-text-short", id:"item-info", placeholder:"報酬   例）昇給年1回（月あたり0~8000円）、賞与年2回(賞与月数:計3ヶ月分) ※業績により変動あり、など" ,rows:"7" ,maxlength:"1000" %>
+      </div>
+      <div class="form">
+        
+        <div class="items-explain">
+          <div class="weight-bold-text">
+            勤務時間・時間外労働時間
+            <span class="indispensable">必須</span>
+          </div>
+          <%= f.text_area :working_hours, class:"items-text-short", id:"item-info", placeholder:"勤務時間・時間外労働時間   例）8:30〜17:00、休憩60分、時間外労働あり（月平均：10時間）など" ,rows:"7" ,maxlength:"1000" %>
+        </div>
+        <div class="weight-bold-text">
+          休日
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:holiday_id, Holiday.all, :id, :name, {}, {class:"select-box", id:"item-sales-status"}) %>
+        <div class="weight-bold-text">
+          経験の有無
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:experience_id, Experience.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
+        <div class="weight-bold-text">
+          学歴
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:educational_background_id, EducationalBackground.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
+        <div class="weight-bold-text">
+          年齢
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:age_requirements_id, AgeRequirements.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
+    </div>
+    <%# /商品の詳細 %>
+
+    
+    <%# /配送について %>
+
+   
+
+    <%# 注意書き %>
+    <ul class="caution">
+      <P class="sentence">
+      ※注意事項
+      </P>
+      <li class="sentence">
+        採用予定の仕事の「職種」「仕事の内容」「就業時間」「休日」「就業場所」「雇用形態（正社員、契約社員等）」などの条件を明示していただいております応募者を採用する場合にはこれらの求人票に記載した条件を順守するようお願いします。
+      </li>
+      <li class="sentence">
+        記載した条件と異なる職種について採用をご希望の場合は、別の求人として分けてお申し込みください。
+        
+      </li>
+      <li class="sentence">
+        採用選考に当たっては、技能や経験、面接内容など、職務についての応募者の適性・能力により判断し、家族状況や生活環境といった、応募者の適性・能力とは関係ない事柄で判断しないようにお願いします。
+      </li>
+    </ul>
+    <%# /注意書き %>
+    <%# 下部ボタン %>
+    <div class="sell-btn-contents">
+      <%= f.submit "掲載する" ,class:"sell-btn" %>
+      <%=link_to 'もどる', root_path, class:"back-btn" %>
+    </div>
+    <%# /下部ボタン %>
+  </div>
+  <% end %>
+
+  
+</div>
